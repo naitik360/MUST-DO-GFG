@@ -1,0 +1,18 @@
+class Solution {
+  public:
+    long long int nthFibonacci(long long int n){
+        // code here
+        long long int f=1,s=1;
+        if(n<=2)
+          return 1;
+        
+        long long int t;
+        for(long long int i=3;i<=n;i++)
+        {
+            t = (s + f)%1000000007;
+            s=f;
+            f=t;
+        }
+        return t;
+    }
+};
