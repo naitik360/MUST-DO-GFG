@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+using namespace std;
+int dp[1000];
+int minCount(int n)
+{
+    if(floor(sqrt(n))==ceil(sqrt(n)))
+      return 1;
+    else if(dp[n]!=-1)
+     return dp[n];
+    
+    int res=n;
+    for(int i=1;i<=n;i++)
+    {
+        int t = i*i;
+        
+        if(t>n)
+          break;
+          
+        res = min(res,1+minCount(n-t));
+    }
+  return dp[n]=res;
+}
+
+int main()
+{   
+    memeset(dp,-1,sizeof(dp));
+	cout << minCount(6);
+	return 0;
+}
