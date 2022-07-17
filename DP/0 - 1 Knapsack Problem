@@ -1,0 +1,31 @@
+class Solution
+{
+    public:
+    int find(int wt[],int val[],int i,int n,int k,vector<vector<int>> &dp)
+    {
+        if(i==n)
+        {
+            if(k==0) return 0;
+            else return INT_MIN;
+        }
+        else if(k<0)
+        {
+            return INT_MIN;
+        }
+        else if(dp[i][k]!=-1)
+          return dp[i][k];
+          
+        int take = 0 , not_take = 0 ;
+        
+        if(k-wt[i]>=0)
+          take = val[i] + find(wt,val,i+1,n,k-wt[i],dp);
+        not_take = 0 + find(wt,val,i+1,n,k,dp);
+        
+        return dp[i][k]=max(take,not_take);
+    }
+    int knapSack(int W, int wt[], int val[], int n) 
+    {  
+       vector<vector<int>> dp(n+1,vector<int>(W+1,-1));
+       return find(wt,val,0,n,W,dp);
+    }
+};
